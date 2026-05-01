@@ -7,16 +7,10 @@ final preferencesServiceProvider =
   return PreferencesService.create();
 });
 
-final userNameProvider = Provider<String?>((ref) {
-  return ref.watch(preferencesServiceProvider).maybeWhen(
-        data: (prefs) => prefs.userName,
-        orElse: () => null,
-      );
+final userNameProvider = StateProvider<String?>((ref) {
+  return ref.watch(preferencesServiceProvider).valueOrNull?.userName;
 });
 
-final isOnboardingDoneProvider = Provider<bool>((ref) {
-  return ref.watch(preferencesServiceProvider).maybeWhen(
-        data: (prefs) => prefs.isOnboardingDone,
-        orElse: () => false,
-      );
+final isOnboardingDoneProvider = StateProvider<bool>((ref) {
+  return ref.watch(preferencesServiceProvider).valueOrNull?.isOnboardingDone ?? false;
 });

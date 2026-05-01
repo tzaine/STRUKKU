@@ -2,11 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'app.dart';
 import 'core/services/notification_service.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Initialize Indonesian locale
   await initializeDateFormatting('id_ID', null);
@@ -18,6 +20,8 @@ void main() async {
       // Deep link handled in router via extra state
     },
   );
+
+  FlutterNativeSplash.remove();
 
   runApp(
     const ProviderScope(

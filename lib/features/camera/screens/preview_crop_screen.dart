@@ -79,13 +79,13 @@ class _PreviewCropScreenState extends ConsumerState<PreviewCropScreen> {
                     ? Container(
                         width: double.infinity,
                         color: AppColors.surface,
-                        child: const Center(
+                        child: Center(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              CircularProgressIndicator(
+                              const CircularProgressIndicator(
                                   color: AppColors.accent),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               Text('Memproses OCR...',
                                   style: AppTypography.body),
                             ],

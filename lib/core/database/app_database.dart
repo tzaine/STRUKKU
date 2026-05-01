@@ -31,6 +31,12 @@ class AppDatabase extends _$AppDatabase {
   }
 
   static QueryExecutor _openConnection() {
-    return driftDatabase(name: 'strukku_db');
+    return driftDatabase(
+      name: 'strukku_db',
+      web: DriftWebOptions(
+        sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+        driftWorker: Uri.parse('drift_worker.dart.js'),
+      ),
+    );
   }
 }

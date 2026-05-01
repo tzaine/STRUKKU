@@ -52,6 +52,9 @@ class _NameInputScreenState extends ConsumerState<NameInputScreen>
     await prefs.setUserName(name);
     await prefs.completeOnboarding();
 
+    ref.read(userNameProvider.notifier).state = name;
+    ref.read(isOnboardingDoneProvider.notifier).state = true;
+
     if (mounted) {
       context.go('/home');
     }

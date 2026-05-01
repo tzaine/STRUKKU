@@ -1,6 +1,7 @@
 // lib/app.dart  — GoRouter navigation + shell route
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'core/services/ocr_service.dart';
@@ -157,6 +158,11 @@ class StrukuApp extends ConsumerWidget {
       supportedLocales: const [
         Locale('id', 'ID'),
         Locale('en', 'US'),
+      ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
     );
   }

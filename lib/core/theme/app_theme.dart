@@ -23,7 +23,7 @@ class AppTheme {
         onError: Colors.white,
         outline: AppColors.border,
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: AppColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
@@ -36,7 +36,7 @@ class AppTheme {
         iconTheme: IconThemeData(color: AppColors.textPrimary, size: 24),
         centerTitle: false,
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: AppColors.background,
         selectedItemColor: AppColors.accent,
         unselectedItemColor: AppColors.textSecondary,
@@ -88,7 +88,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-          textStyle: const TextStyle(
+          textStyle: TextStyle(
             fontFamily: AppTypography.fontFamily,
             fontSize: 15,
             fontWeight: FontWeight.w600,
@@ -104,7 +104,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-          textStyle: const TextStyle(
+          textStyle: TextStyle(
             fontFamily: AppTypography.fontFamily,
             fontSize: 15,
             fontWeight: FontWeight.w600,
@@ -115,7 +115,7 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.accent,
-          textStyle: const TextStyle(
+          textStyle: TextStyle(
             fontFamily: AppTypography.fontFamily,
             fontSize: 14,
             fontWeight: FontWeight.w600,
