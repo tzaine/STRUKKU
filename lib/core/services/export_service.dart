@@ -82,14 +82,15 @@ class ExportService {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
-        pw.Text('Strukku — Laporan Struk Belanja',
+        pw.Text('STRUKKU | Laporan Struk Belanja',
             style: pw.TextStyle(
-                fontSize: 18, fontWeight: pw.FontWeight.bold)),
+                fontSize: 18, fontWeight: pw.FontWeight.bold, color: PdfColors.teal)),
         pw.SizedBox(height: 4),
         pw.Text(
-            '$count struk • Total ${_currencyFmt.format(total)} • Diekspor ${DateFormat('dd MMM yyyy').format(DateTime.now())}',
-            style: const pw.TextStyle(fontSize: 11, color: PdfColors.grey700)),
-        pw.Divider(thickness: 0.5, color: PdfColors.grey300),
+            '$count struk | Total ${_currencyFmt.format(total)} | Diekspor ${DateFormat('dd MMM yyyy').format(DateTime.now())}',
+            style: const pw.TextStyle(fontSize: 10, color: PdfColors.grey700)),
+        pw.SizedBox(height: 4),
+        pw.Divider(thickness: 1, color: PdfColors.teal),
         pw.SizedBox(height: 8),
       ],
     );

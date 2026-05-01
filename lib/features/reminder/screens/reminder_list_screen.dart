@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import '../../../core/database/app_database.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../../../core/utils/date_formatter.dart';
-import '../../../shared/widgets/empty_state_widget.dart';
-import '../../../shared/widgets/reminder_badge.dart';
-import '../../home/providers/home_provider.dart';
+import 'package:strukku/core/database/app_database.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/core/utils/date_formatter.dart';
+import 'package:strukku/shared/widgets/empty_state_widget.dart';
+import 'package:strukku/shared/widgets/reminder_badge.dart';
+import 'package:strukku/features/home/providers/home_provider.dart';
 
 class ReminderListScreen extends ConsumerWidget {
   const ReminderListScreen({super.key});
@@ -28,37 +28,33 @@ class ReminderListScreen extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
               child: Text('Reminder Aktif', style: AppTypography.pageTitle),
             ),
-
             Expanded(
               child: remindersAsync.when(
-                loading: () =>
-                    const Center(child: CircularProgressIndicator()),
+                loading: () => const Center(child: CircularProgressIndicator()),
                 error: (e, _) => Center(child: Text('Error: $e')),
                 data: (reminders) {
                   if (reminders.isEmpty) {
-                    return EmptyStateWidget(
+                    return const EmptyStateWidget(
                       icon: Icons.notifications_none_rounded,
                       title: 'Semua aman, tidak ada deadline.',
-                      subtitle:
-                          'Tidak ada reminder aktif saat ini.',
+                      subtitle: 'Tidak ada reminder aktif saat ini.',
                     );
                   }
 
-                  final sorted = List.of(reminders)..sort((a, b) => 
-                      DateTime.parse(a.scheduledDate).compareTo(DateTime.parse(b.scheduledDate)));
+                  final sorted = List.of(reminders)
+                    ..sort((a, b) => DateTime.parse(a.scheduledDate)
+                        .compareTo(DateTime.parse(b.scheduledDate)));
 
                   return ListView.builder(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 80),
                     itemCount: sorted.length,
                     itemBuilder: (_, i) {
                       final r = sorted[i];
-                      final deadline =
-                          DateTime.parse(r.scheduledDate);
+                      final deadline = DateTime.parse(r.scheduledDate);
                       return _ReminderCard(
                         reminder: r,
                         deadline: deadline,
-                        onTap: () =>
-                            context.go('/home/detail/${r.receiptId}'),
+                        onTap: () => context.go('/home/detail/${r.receiptId}'),
                         onDismiss: () async {
                           final dao = ref.read(remindersDaoProvider);
                           await dao.dismissReminder(r.id);

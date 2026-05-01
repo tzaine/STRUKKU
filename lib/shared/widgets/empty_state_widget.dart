@@ -1,7 +1,7 @@
 // lib/shared/widgets/empty_state_widget.dart
 import 'package:flutter/material.dart';
-import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_typography.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final IconData icon;
@@ -52,8 +52,8 @@ class EmptyStateWidget extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 subtitle!,
-                style: AppTypography.body
-                    .copyWith(color: AppColors.textSecondary),
+                style:
+                    AppTypography.body.copyWith(color: AppColors.textSecondary),
                 textAlign: TextAlign.center,
               ),
             ],

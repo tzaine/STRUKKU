@@ -1,7 +1,7 @@
 // lib/shared/widgets/app_bottom_nav.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_colors.dart';
 
 class AppBottomNav extends StatelessWidget {
   final Widget child;
@@ -131,9 +131,7 @@ class _NavItem extends StatelessWidget {
                 selected ? iconFilled : icon,
                 key: ValueKey(selected),
                 size: 24,
-                color: selected
-                    ? AppColors.accent
-                    : AppColors.textSecondary,
+                color: selected ? AppColors.accent : AppColors.textSecondary,
               ),
             ),
             const SizedBox(height: 4),
@@ -142,11 +140,8 @@ class _NavItem extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Inter',
                 fontSize: 11,
-                fontWeight:
-                    selected ? FontWeight.w600 : FontWeight.w400,
-                color: selected
-                    ? AppColors.accent
-                    : AppColors.textSecondary,
+                fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+                color: selected ? AppColors.accent : AppColors.textSecondary,
               ),
             ),
           ],

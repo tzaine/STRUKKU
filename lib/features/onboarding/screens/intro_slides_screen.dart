@@ -1,8 +1,8 @@
 // lib/features/onboarding/screens/intro_slides_screen.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
 
 class IntroSlidesScreen extends StatefulWidget {
   const IntroSlidesScreen({super.key});
@@ -62,9 +62,8 @@ class _IntroSlidesScreenState extends State<IntroSlidesScreen> {
                   width: i == _currentPage ? 20 : 6,
                   height: 6,
                   decoration: BoxDecoration(
-                    color: i == _currentPage
-                        ? AppColors.accent
-                        : AppColors.border,
+                    color:
+                        i == _currentPage ? AppColors.accent : AppColors.border,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
@@ -104,8 +103,7 @@ class _IntroSlidesScreenState extends State<IntroSlidesScreen> {
                               ),
                               const SizedBox(width: 4),
                               const Icon(Icons.arrow_forward,
-                                  size: 14,
-                                  color: AppColors.textSecondary),
+                                  size: 14, color: AppColors.textSecondary),
                             ],
                           ),
                         ),
@@ -117,8 +115,8 @@ class _IntroSlidesScreenState extends State<IntroSlidesScreen> {
             const SizedBox(height: 24),
             Text(
               'Strukku',
-              style: AppTypography.sectionTitle
-                  .copyWith(color: AppColors.accent),
+              style:
+                  AppTypography.sectionTitle.copyWith(color: AppColors.accent),
             ),
             Text(
               'Simpan struk. Jangan kehilangan hak klaim.',

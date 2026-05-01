@@ -1,7 +1,8 @@
 // lib/features/splash/screens/splash_screen.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/theme/app_colors.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:strukku/core/theme/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,6 +20,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+    FlutterNativeSplash.remove();
 
     _controller = AnimationController(
       vsync: this,
@@ -81,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen>
                 width: 140,
                 height: 140,
                 // Menggunakan filterQuality agar logo terlihat lebih halus
-                filterQuality: FilterQuality.high, 
+                filterQuality: FilterQuality.high,
               ),
               const SizedBox(height: 24),
               // Opsional: Menambahkan sedikit teks nama aplikasi yang muncul perlahan

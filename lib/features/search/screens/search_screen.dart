@@ -2,12 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/models/receipt_model.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../../../shared/widgets/empty_state_widget.dart';
-import '../../../shared/widgets/receipt_card_widget.dart';
-import '../../home/providers/home_provider.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/shared/widgets/empty_state_widget.dart';
+import 'package:strukku/shared/widgets/receipt_card_widget.dart';
+import 'package:strukku/features/home/providers/home_provider.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
@@ -75,8 +75,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         ],
       ),
       body: receiptsAsync.when(
-        loading: () =>
-            const Center(child: CircularProgressIndicator()),
+        loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Error: $e')),
         data: (all) {
           if (_query.isEmpty) {
@@ -103,11 +102,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           }).toList();
 
           if (results.isEmpty) {
-            return EmptyStateWidget(
+            return const EmptyStateWidget(
               icon: Icons.search_off_rounded,
               title: 'Tidak ada struk ditemukan',
-              subtitle:
-                  'Coba kata kunci atau filter yang berbeda.',
+              subtitle: 'Coba kata kunci atau filter yang berbeda.',
             );
           }
 

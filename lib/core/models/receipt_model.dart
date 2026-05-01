@@ -1,5 +1,5 @@
 // lib/core/models/receipt_model.dart
-import 'receipt_item.dart';
+import 'package:strukku/core/models/receipt_item.dart';
 
 enum ReceiptCategory {
   makanan('Makanan'),

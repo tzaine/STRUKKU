@@ -1,11 +1,11 @@
 // lib/features/home/providers/home_provider.dart
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/database/app_database.dart';
-import '../../../core/database/daos/receipts_dao.dart';
-import '../../../core/database/daos/reminders_dao.dart';
-import '../../../core/models/receipt_model.dart';
-import '../../onboarding/providers/onboarding_provider.dart';
+import 'package:strukku/core/database/app_database.dart';
+import 'package:strukku/core/database/daos/receipts_dao.dart';
+import 'package:strukku/core/database/daos/reminders_dao.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/features/onboarding/providers/onboarding_provider.dart';
 
 // ─── Database provider ────────────────────────────────────────────────────────
 final appDatabaseProvider = Provider<AppDatabase>((ref) {
@@ -44,8 +44,7 @@ final thisMonthReceiptsProvider = StreamProvider<List<ReceiptModel>>((ref) {
       );
 });
 
-final remindersStreamProvider =
-    StreamProvider<List<ReminderLogData>>((ref) {
+final remindersStreamProvider = StreamProvider<List<ReminderLogData>>((ref) {
   final dao = ref.watch(remindersDaoProvider);
   return dao.watchAllReminders();
 });
@@ -76,7 +75,6 @@ final homeStatsProvider = Provider<HomeStats>((ref) {
   return HomeStats(
     receiptCountThisMonth: monthly.length,
     activeReminderCount: reminders.length,
-    totalThisMonth:
-        monthly.fold(0, (sum, r) => sum + r.totalAmount),
+    totalThisMonth: monthly.fold(0, (sum, r) => sum + r.totalAmount),
   );
 });

@@ -1,7 +1,7 @@
 // lib/shared/widgets/category_badge.dart
 import 'package:flutter/material.dart';
-import '../../core/models/receipt_model.dart';
-import '../../core/utils/category_helper.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/core/utils/category_helper.dart';
 
 class CategoryBadge extends StatelessWidget {
   final ReceiptCategory category;

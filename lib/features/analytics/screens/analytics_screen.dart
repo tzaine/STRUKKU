@@ -2,12 +2,12 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/models/receipt_model.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../../../core/utils/category_helper.dart';
-import '../../../core/utils/currency_formatter.dart';
-import '../../home/providers/home_provider.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/core/utils/category_helper.dart';
+import 'package:strukku/core/utils/currency_formatter.dart';
+import 'package:strukku/features/home/providers/home_provider.dart';
 
 enum AnalyticsPeriod { week, month, threeMonths }
 
@@ -46,8 +46,6 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
     return map;
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final receiptsAsync = ref.watch(allReceiptsStreamProvider);
@@ -56,8 +54,7 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: receiptsAsync.when(
-          loading: () =>
-              const Center(child: CircularProgressIndicator()),
+          loading: () => const Center(child: CircularProgressIndicator()),
           error: (e, _) => Center(child: Text('Error: $e')),
           data: (all) {
             final filtered = _getFiltered(all);
@@ -100,8 +97,7 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
                               color: selected
                                   ? AppColors.accent
                                   : AppColors.surface,
-                              borderRadius:
-                                  BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20),
                               border: Border.all(
                                 color: selected
                                     ? AppColors.accent
@@ -137,15 +133,13 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                            color: AppColors.border, width: 0.5),
+                        border: Border.all(color: AppColors.border, width: 0.5),
                       ),
                       child: Row(
                         children: [
                           Expanded(
                             child: Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('Total Periode Ini',
                                     style: AppTypography.caption),
@@ -153,8 +147,7 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
                                 Text(
                                   CurrencyFormatter.format(totalSpend),
                                   style: AppTypography.pageTitle
-                                      .copyWith(
-                                          color: AppColors.accent),
+                                      .copyWith(color: AppColors.accent),
                                 ),
                               ],
                             ),
@@ -168,8 +161,7 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
                             ),
                             child: Text('${filtered.length} struk',
                                 style: AppTypography.caption
-                                    .copyWith(
-                                        color: AppColors.accent)),
+                                    .copyWith(color: AppColors.accent)),
                           ),
                         ],
                       ),
@@ -192,31 +184,28 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
                             height: 180,
                             child: BarChart(
                               BarChartData(
-                                alignment:
-                                    BarChartAlignment.spaceAround,
+                                alignment: BarChartAlignment.spaceAround,
                                 maxY: catTotals.values.isEmpty
                                     ? 100
-                                    : catTotals.values.reduce(
-                                            (a, b) => a > b ? a : b) *
+                                    : catTotals.values
+                                            .reduce((a, b) => a > b ? a : b) *
                                         1.2,
-                                barGroups:
-                                    _buildSimpleBarGroups(filtered),
+                                barGroups: _buildSimpleBarGroups(filtered),
                                 gridData: const FlGridData(show: false),
-                                borderData:
-                                    FlBorderData(show: false),
-                                titlesData: FlTitlesData(
-                                  leftTitles: const AxisTitles(
-                                    sideTitles: SideTitles(
-                                        showTitles: false)),
-                                  rightTitles: const AxisTitles(
-                                    sideTitles: SideTitles(
-                                        showTitles: false)),
-                                  topTitles: const AxisTitles(
-                                    sideTitles: SideTitles(
-                                        showTitles: false)),
-                                  bottomTitles: const AxisTitles(
-                                    sideTitles: SideTitles(
-                                        showTitles: false)),
+                                borderData: FlBorderData(show: false),
+                                titlesData: const FlTitlesData(
+                                  leftTitles: AxisTitles(
+                                      sideTitles:
+                                          SideTitles(showTitles: false)),
+                                  rightTitles: AxisTitles(
+                                      sideTitles:
+                                          SideTitles(showTitles: false)),
+                                  topTitles: AxisTitles(
+                                      sideTitles:
+                                          SideTitles(showTitles: false)),
+                                  bottomTitles: AxisTitles(
+                                      sideTitles:
+                                          SideTitles(showTitles: false)),
                                 ),
                               ),
                               swapAnimationDuration:
@@ -253,18 +242,14 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
                                           .entries
                                           .map((e) {
                                         final pct = totalSpend > 0
-                                            ? e.value.value /
-                                                totalSpend *
-                                                100
+                                            ? e.value.value / totalSpend * 100
                                             : 0.0;
                                         return PieChartSectionData(
                                           value: e.value.value,
-                                          color:
-                                              CategoryHelper.getChartColor(
-                                                  e.value.key),
+                                          color: CategoryHelper.getChartColor(
+                                              e.value.key),
                                           radius: 40,
-                                          title:
-                                              '${pct.toStringAsFixed(0)}%',
+                                          title: '${pct.toStringAsFixed(0)}%',
                                           titleStyle: const TextStyle(
                                             fontFamily: 'Inter',
                                             fontSize: 11,
@@ -278,46 +263,40 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
                                     ),
                                     swapAnimationDuration:
                                         const Duration(milliseconds: 500),
-                                    swapAnimationCurve:
-                                        Curves.easeInOut,
+                                    swapAnimationCurve: Curves.easeInOut,
                                   ),
                                 ),
                                 const SizedBox(width: 16),
                                 // Legend
                                 Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: catTotals.entries
                                       .toList()
                                       .asMap()
                                       .entries
                                       .take(4)
                                       .map((e) => Padding(
-                                            padding:
-                                                const EdgeInsets.only(
-                                                    bottom: 8),
+                                            padding: const EdgeInsets.only(
+                                                bottom: 8),
                                             child: Row(
                                               children: [
                                                 Container(
                                                   width: 10,
                                                   height: 10,
-                                                  decoration:
-                                                      BoxDecoration(
+                                                  decoration: BoxDecoration(
                                                     color: CategoryHelper
                                                         .getChartColor(
                                                             e.value.key),
                                                     borderRadius:
-                                                        BorderRadius
-                                                            .circular(3),
+                                                        BorderRadius.circular(
+                                                            3),
                                                   ),
                                                 ),
                                                 const SizedBox(width: 6),
                                                 Text(
                                                   e.value.key.label,
-                                                  style: AppTypography
-                                                      .caption,
+                                                  style: AppTypography.caption,
                                                 ),
                                               ],
                                             ),
@@ -344,15 +323,12 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
                               style: AppTypography.sectionTitle),
                           const SizedBox(height: 12),
                           ...sortedCats.take(3).map((e) {
-                            final pct = totalSpend > 0
-                                ? e.value / totalSpend
-                                : 0.0;
+                            final pct =
+                                totalSpend > 0 ? e.value / totalSpend : 0.0;
                             return Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 14),
+                              padding: const EdgeInsets.only(bottom: 14),
                               child: Column(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     children: [
@@ -367,22 +343,19 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
                                             style: AppTypography.body),
                                       ),
                                       Text(
-                                        CurrencyFormatter.format(
-                                            e.value),
+                                        CurrencyFormatter.format(e.value),
                                         style: AppTypography.bodyBold,
                                       ),
                                     ],
                                   ),
                                   const SizedBox(height: 6),
                                   ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.circular(4),
+                                    borderRadius: BorderRadius.circular(4),
                                     child: LinearProgressIndicator(
                                       value: pct,
                                       backgroundColor: AppColors.border,
-                                      valueColor:
-                                          const AlwaysStoppedAnimation(
-                                              AppColors.accent),
+                                      valueColor: const AlwaysStoppedAnimation(
+                                          AppColors.accent),
                                       minHeight: 4,
                                     ),
                                   ),

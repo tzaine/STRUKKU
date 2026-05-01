@@ -6,10 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../widgets/scan_overlay.dart';
-import '../widgets/scan_line_animation.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/features/camera/widgets/scan_overlay.dart';
+import 'package:strukku/features/camera/widgets/scan_line_animation.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -127,19 +127,18 @@ class _CameraScreenState extends State<CameraScreen>
 
           // ─── Scan line ────────────────────────────────────────────────────
           if (_isInitialized)
-            Center(
+            const Center(
               child: SizedBox(
                 width: 280,
                 height: 380,
-                child: const ScanLineAnimation(width: 280),
+                child: ScanLineAnimation(width: 280),
               ),
             ),
 
           // ─── Top bar ──────────────────────────────────────────────────────
           SafeArea(
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
                 children: [
                   _IconButton(
@@ -233,8 +232,8 @@ class _CameraScreenState extends State<CameraScreen>
                                 padding: EdgeInsets.all(20),
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation(
-                                      AppColors.accent),
+                                  valueColor:
+                                      AlwaysStoppedAnimation(AppColors.accent),
                                 ),
                               )
                             : Center(

@@ -1,6 +1,6 @@
 // lib/core/database/tables/reminder_log.dart
 import 'package:drift/drift.dart';
-import 'receipts.dart';
+import 'package:strukku/core/database/tables/receipts.dart';
 
 class ReminderLog extends Table {
   IntColumn get id => integer().autoIncrement()();
@@ -13,6 +13,5 @@ class ReminderLog extends Table {
   TextColumn get reminderType => text()(); // 'Retur' | 'Garansi'
   TextColumn get scheduledDate => text()(); // ISO-8601
   BoolColumn get isSent => boolean().withDefault(const Constant(false))();
-  BoolColumn get isDismissed =>
-      boolean().withDefault(const Constant(false))();
+  BoolColumn get isDismissed => boolean().withDefault(const Constant(false))();
 }

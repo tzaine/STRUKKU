@@ -1,6 +1,6 @@
 // lib/features/onboarding/providers/onboarding_provider.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/services/preferences_service.dart';
+import 'package:strukku/core/services/preferences_service.dart';
 
 final preferencesServiceProvider =
     FutureProvider<PreferencesService>((ref) async {
@@ -12,5 +12,6 @@ final userNameProvider = StateProvider<String?>((ref) {
 });
 
 final isOnboardingDoneProvider = StateProvider<bool>((ref) {
-  return ref.watch(preferencesServiceProvider).valueOrNull?.isOnboardingDone ?? false;
+  return ref.watch(preferencesServiceProvider).valueOrNull?.isOnboardingDone ??
+      false;
 });

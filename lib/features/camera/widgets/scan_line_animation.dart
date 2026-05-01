@@ -1,6 +1,6 @@
 // lib/features/camera/widgets/scan_line_animation.dart
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_colors.dart';
 
 class ScanLineAnimation extends StatefulWidget {
   final double width;

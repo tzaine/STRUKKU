@@ -1,7 +1,7 @@
 // lib/core/utils/category_helper.dart
 import 'package:flutter/material.dart';
-import '../models/receipt_model.dart';
-import '../theme/app_colors.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/core/theme/app_colors.dart';
 
 class CategoryHelper {
   static Color getBgColor(ReceiptCategory category) {

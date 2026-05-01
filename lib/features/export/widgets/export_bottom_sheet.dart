@@ -1,11 +1,11 @@
 // lib/features/export/widgets/export_bottom_sheet.dart  [SCREEN 11]
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../core/models/receipt_model.dart';
-import '../../../core/services/export_service.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../../../core/utils/currency_formatter.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/core/services/export_service.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/core/utils/currency_formatter.dart';
 
 enum ExportFormat { pdf, excel }
 
@@ -14,8 +14,7 @@ class ExportBottomSheet extends StatefulWidget {
 
   const ExportBottomSheet({super.key, required this.receipts});
 
-  static Future<void> show(
-      BuildContext context, List<ReceiptModel> receipts) {
+  static Future<void> show(BuildContext context, List<ReceiptModel> receipts) {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -33,8 +32,7 @@ class _ExportBottomSheetState extends State<ExportBottomSheet> {
   ExportFormat _format = ExportFormat.pdf;
   bool _isExporting = false;
 
-  double get _total =>
-      widget.receipts.fold(0, (s, r) => s + r.totalAmount);
+  double get _total => widget.receipts.fold(0, (s, r) => s + r.totalAmount);
 
   Future<void> _export() async {
     setState(() => _isExporting = true);
@@ -97,16 +95,14 @@ class _ExportBottomSheetState extends State<ExportBottomSheet> {
                   icon: Icons.picture_as_pdf_outlined,
                   label: 'PDF',
                   selected: _format == ExportFormat.pdf,
-                  onTap: () =>
-                      setState(() => _format = ExportFormat.pdf),
+                  onTap: () => setState(() => _format = ExportFormat.pdf),
                 ),
                 const SizedBox(width: 12),
                 _FormatOption(
                   icon: Icons.table_chart_outlined,
                   label: 'Excel',
                   selected: _format == ExportFormat.excel,
-                  onTap: () =>
-                      setState(() => _format = ExportFormat.excel),
+                  onTap: () => setState(() => _format = ExportFormat.excel),
                 ),
               ],
             ),
@@ -138,17 +134,15 @@ class _ExportBottomSheetState extends State<ExportBottomSheet> {
 
             // ─── Export button ───────────────────────────────────────────
             ElevatedButton(
-              onPressed: widget.receipts.isEmpty || _isExporting
-                  ? null
-                  : _export,
+              onPressed:
+                  widget.receipts.isEmpty || _isExporting ? null : _export,
               child: _isExporting
                   ? const SizedBox(
                       width: 20,
                       height: 20,
                       child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor:
-                              AlwaysStoppedAnimation(Colors.white)))
+                          valueColor: AlwaysStoppedAnimation(Colors.white)))
                   : const Text('Export Sekarang'),
             ),
           ],
@@ -192,9 +186,7 @@ class _FormatOption extends StatelessWidget {
             children: [
               Icon(icon,
                   size: 24,
-                  color: selected
-                      ? AppColors.accent
-                      : AppColors.textSecondary),
+                  color: selected ? AppColors.accent : AppColors.textSecondary),
               const SizedBox(height: 6),
               Text(
                 label,
@@ -202,9 +194,7 @@ class _FormatOption extends StatelessWidget {
                   fontFamily: 'Inter',
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
-                  color: selected
-                      ? AppColors.accent
-                      : AppColors.textSecondary,
+                  color: selected ? AppColors.accent : AppColors.textSecondary,
                 ),
               ),
             ],

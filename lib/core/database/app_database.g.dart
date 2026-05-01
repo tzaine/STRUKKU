@@ -1143,22 +1143,259 @@ typedef $$ReceiptsTableUpdateCompanionBuilder = ReceiptsCompanion Function({
   Value<String> updatedAt,
 });
 
+final class $$ReceiptsTableReferences
+    extends BaseReferences<_$AppDatabase, $ReceiptsTable, Receipt> {
+  $$ReceiptsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$ReminderLogTable, List<ReminderLogData>>
+      _reminderLogRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+          db.reminderLog,
+          aliasName:
+              $_aliasNameGenerator(db.receipts.id, db.reminderLog.receiptId));
+
+  $$ReminderLogTableProcessedTableManager get reminderLogRefs {
+    final manager = $$ReminderLogTableTableManager($_db, $_db.reminderLog)
+        .filter((f) => f.receiptId.id($_item.id));
+
+    final cache = $_typedResult.readTableOrNull(_reminderLogRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$ReceiptsTableFilterComposer
+    extends Composer<_$AppDatabase, $ReceiptsTable> {
+  $$ReceiptsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get storeName => $composableBuilder(
+      column: $table.storeName, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get date => $composableBuilder(
+      column: $table.date, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get totalAmount => $composableBuilder(
+      column: $table.totalAmount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get photoPath => $composableBuilder(
+      column: $table.photoPath, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get itemsJson => $composableBuilder(
+      column: $table.itemsJson, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get notes => $composableBuilder(
+      column: $table.notes, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get hasReminder => $composableBuilder(
+      column: $table.hasReminder, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get reminderType => $composableBuilder(
+      column: $table.reminderType, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get reminderDate => $composableBuilder(
+      column: $table.reminderDate, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get notifDays => $composableBuilder(
+      column: $table.notifDays, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get anomalyDetected => $composableBuilder(
+      column: $table.anomalyDetected,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+
+  Expression<bool> reminderLogRefs(
+      Expression<bool> Function($$ReminderLogTableFilterComposer f) f) {
+    final $$ReminderLogTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.reminderLog,
+        getReferencedColumn: (t) => t.receiptId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ReminderLogTableFilterComposer(
+              $db: $db,
+              $table: $db.reminderLog,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$ReceiptsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ReceiptsTable> {
+  $$ReceiptsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get storeName => $composableBuilder(
+      column: $table.storeName, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get date => $composableBuilder(
+      column: $table.date, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get totalAmount => $composableBuilder(
+      column: $table.totalAmount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get photoPath => $composableBuilder(
+      column: $table.photoPath, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get itemsJson => $composableBuilder(
+      column: $table.itemsJson, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get notes => $composableBuilder(
+      column: $table.notes, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get hasReminder => $composableBuilder(
+      column: $table.hasReminder, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get reminderType => $composableBuilder(
+      column: $table.reminderType,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get reminderDate => $composableBuilder(
+      column: $table.reminderDate,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get notifDays => $composableBuilder(
+      column: $table.notifDays, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get anomalyDetected => $composableBuilder(
+      column: $table.anomalyDetected,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$ReceiptsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ReceiptsTable> {
+  $$ReceiptsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get storeName =>
+      $composableBuilder(column: $table.storeName, builder: (column) => column);
+
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<double> get totalAmount => $composableBuilder(
+      column: $table.totalAmount, builder: (column) => column);
+
+  GeneratedColumn<String> get category =>
+      $composableBuilder(column: $table.category, builder: (column) => column);
+
+  GeneratedColumn<String> get photoPath =>
+      $composableBuilder(column: $table.photoPath, builder: (column) => column);
+
+  GeneratedColumn<String> get itemsJson =>
+      $composableBuilder(column: $table.itemsJson, builder: (column) => column);
+
+  GeneratedColumn<String> get notes =>
+      $composableBuilder(column: $table.notes, builder: (column) => column);
+
+  GeneratedColumn<bool> get hasReminder => $composableBuilder(
+      column: $table.hasReminder, builder: (column) => column);
+
+  GeneratedColumn<String> get reminderType => $composableBuilder(
+      column: $table.reminderType, builder: (column) => column);
+
+  GeneratedColumn<String> get reminderDate => $composableBuilder(
+      column: $table.reminderDate, builder: (column) => column);
+
+  GeneratedColumn<String> get notifDays =>
+      $composableBuilder(column: $table.notifDays, builder: (column) => column);
+
+  GeneratedColumn<bool> get anomalyDetected => $composableBuilder(
+      column: $table.anomalyDetected, builder: (column) => column);
+
+  GeneratedColumn<String> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<String> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  Expression<T> reminderLogRefs<T extends Object>(
+      Expression<T> Function($$ReminderLogTableAnnotationComposer a) f) {
+    final $$ReminderLogTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.reminderLog,
+        getReferencedColumn: (t) => t.receiptId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ReminderLogTableAnnotationComposer(
+              $db: $db,
+              $table: $db.reminderLog,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
 class $$ReceiptsTableTableManager extends RootTableManager<
     _$AppDatabase,
     $ReceiptsTable,
     Receipt,
     $$ReceiptsTableFilterComposer,
     $$ReceiptsTableOrderingComposer,
+    $$ReceiptsTableAnnotationComposer,
     $$ReceiptsTableCreateCompanionBuilder,
-    $$ReceiptsTableUpdateCompanionBuilder> {
+    $$ReceiptsTableUpdateCompanionBuilder,
+    (Receipt, $$ReceiptsTableReferences),
+    Receipt,
+    PrefetchHooks Function({bool reminderLogRefs})> {
   $$ReceiptsTableTableManager(_$AppDatabase db, $ReceiptsTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$ReceiptsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$ReceiptsTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$ReceiptsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ReceiptsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ReceiptsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<String> storeName = const Value.absent(),
@@ -1227,180 +1464,48 @@ class $$ReceiptsTableTableManager extends RootTableManager<
             createdAt: createdAt,
             updatedAt: updatedAt,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) =>
+                  (e.readTable(table), $$ReceiptsTableReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: ({reminderLogRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [if (reminderLogRefs) db.reminderLog],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (reminderLogRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable:
+                            $$ReceiptsTableReferences._reminderLogRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$ReceiptsTableReferences(db, table, p0)
+                                .reminderLogRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.receiptId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
-class $$ReceiptsTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $ReceiptsTable> {
-  $$ReceiptsTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get storeName => $state.composableBuilder(
-      column: $state.table.storeName,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get date => $state.composableBuilder(
-      column: $state.table.date,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get totalAmount => $state.composableBuilder(
-      column: $state.table.totalAmount,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get category => $state.composableBuilder(
-      column: $state.table.category,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get photoPath => $state.composableBuilder(
-      column: $state.table.photoPath,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get itemsJson => $state.composableBuilder(
-      column: $state.table.itemsJson,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get notes => $state.composableBuilder(
-      column: $state.table.notes,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<bool> get hasReminder => $state.composableBuilder(
-      column: $state.table.hasReminder,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get reminderType => $state.composableBuilder(
-      column: $state.table.reminderType,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get reminderDate => $state.composableBuilder(
-      column: $state.table.reminderDate,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get notifDays => $state.composableBuilder(
-      column: $state.table.notifDays,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<bool> get anomalyDetected => $state.composableBuilder(
-      column: $state.table.anomalyDetected,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get updatedAt => $state.composableBuilder(
-      column: $state.table.updatedAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ComposableFilter reminderLogRefs(
-      ComposableFilter Function($$ReminderLogTableFilterComposer f) f) {
-    final $$ReminderLogTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.reminderLog,
-        getReferencedColumn: (t) => t.receiptId,
-        builder: (joinBuilder, parentComposers) =>
-            $$ReminderLogTableFilterComposer(ComposerState($state.db,
-                $state.db.reminderLog, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-}
-
-class $$ReceiptsTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $ReceiptsTable> {
-  $$ReceiptsTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get storeName => $state.composableBuilder(
-      column: $state.table.storeName,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get date => $state.composableBuilder(
-      column: $state.table.date,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get totalAmount => $state.composableBuilder(
-      column: $state.table.totalAmount,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get category => $state.composableBuilder(
-      column: $state.table.category,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get photoPath => $state.composableBuilder(
-      column: $state.table.photoPath,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get itemsJson => $state.composableBuilder(
-      column: $state.table.itemsJson,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get notes => $state.composableBuilder(
-      column: $state.table.notes,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<bool> get hasReminder => $state.composableBuilder(
-      column: $state.table.hasReminder,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get reminderType => $state.composableBuilder(
-      column: $state.table.reminderType,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get reminderDate => $state.composableBuilder(
-      column: $state.table.reminderDate,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get notifDays => $state.composableBuilder(
-      column: $state.table.notifDays,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<bool> get anomalyDetected => $state.composableBuilder(
-      column: $state.table.anomalyDetected,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get updatedAt => $state.composableBuilder(
-      column: $state.table.updatedAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
+typedef $$ReceiptsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $ReceiptsTable,
+    Receipt,
+    $$ReceiptsTableFilterComposer,
+    $$ReceiptsTableOrderingComposer,
+    $$ReceiptsTableAnnotationComposer,
+    $$ReceiptsTableCreateCompanionBuilder,
+    $$ReceiptsTableUpdateCompanionBuilder,
+    (Receipt, $$ReceiptsTableReferences),
+    Receipt,
+    PrefetchHooks Function({bool reminderLogRefs})>;
 typedef $$ReminderLogTableCreateCompanionBuilder = ReminderLogCompanion
     Function({
   Value<int> id,
@@ -1420,22 +1525,184 @@ typedef $$ReminderLogTableUpdateCompanionBuilder = ReminderLogCompanion
   Value<bool> isDismissed,
 });
 
+final class $$ReminderLogTableReferences
+    extends BaseReferences<_$AppDatabase, $ReminderLogTable, ReminderLogData> {
+  $$ReminderLogTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ReceiptsTable _receiptIdTable(_$AppDatabase db) =>
+      db.receipts.createAlias(
+          $_aliasNameGenerator(db.reminderLog.receiptId, db.receipts.id));
+
+  $$ReceiptsTableProcessedTableManager? get receiptId {
+    if ($_item.receiptId == null) return null;
+    final manager = $$ReceiptsTableTableManager($_db, $_db.receipts)
+        .filter((f) => f.id($_item.receiptId!));
+    final item = $_typedResult.readTableOrNull(_receiptIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$ReminderLogTableFilterComposer
+    extends Composer<_$AppDatabase, $ReminderLogTable> {
+  $$ReminderLogTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get reminderType => $composableBuilder(
+      column: $table.reminderType, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get scheduledDate => $composableBuilder(
+      column: $table.scheduledDate, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isSent => $composableBuilder(
+      column: $table.isSent, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isDismissed => $composableBuilder(
+      column: $table.isDismissed, builder: (column) => ColumnFilters(column));
+
+  $$ReceiptsTableFilterComposer get receiptId {
+    final $$ReceiptsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.receiptId,
+        referencedTable: $db.receipts,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ReceiptsTableFilterComposer(
+              $db: $db,
+              $table: $db.receipts,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$ReminderLogTableOrderingComposer
+    extends Composer<_$AppDatabase, $ReminderLogTable> {
+  $$ReminderLogTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get reminderType => $composableBuilder(
+      column: $table.reminderType,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get scheduledDate => $composableBuilder(
+      column: $table.scheduledDate,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isSent => $composableBuilder(
+      column: $table.isSent, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isDismissed => $composableBuilder(
+      column: $table.isDismissed, builder: (column) => ColumnOrderings(column));
+
+  $$ReceiptsTableOrderingComposer get receiptId {
+    final $$ReceiptsTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.receiptId,
+        referencedTable: $db.receipts,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ReceiptsTableOrderingComposer(
+              $db: $db,
+              $table: $db.receipts,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$ReminderLogTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ReminderLogTable> {
+  $$ReminderLogTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get reminderType => $composableBuilder(
+      column: $table.reminderType, builder: (column) => column);
+
+  GeneratedColumn<String> get scheduledDate => $composableBuilder(
+      column: $table.scheduledDate, builder: (column) => column);
+
+  GeneratedColumn<bool> get isSent =>
+      $composableBuilder(column: $table.isSent, builder: (column) => column);
+
+  GeneratedColumn<bool> get isDismissed => $composableBuilder(
+      column: $table.isDismissed, builder: (column) => column);
+
+  $$ReceiptsTableAnnotationComposer get receiptId {
+    final $$ReceiptsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.receiptId,
+        referencedTable: $db.receipts,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ReceiptsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.receipts,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
 class $$ReminderLogTableTableManager extends RootTableManager<
     _$AppDatabase,
     $ReminderLogTable,
     ReminderLogData,
     $$ReminderLogTableFilterComposer,
     $$ReminderLogTableOrderingComposer,
+    $$ReminderLogTableAnnotationComposer,
     $$ReminderLogTableCreateCompanionBuilder,
-    $$ReminderLogTableUpdateCompanionBuilder> {
+    $$ReminderLogTableUpdateCompanionBuilder,
+    (ReminderLogData, $$ReminderLogTableReferences),
+    ReminderLogData,
+    PrefetchHooks Function({bool receiptId})> {
   $$ReminderLogTableTableManager(_$AppDatabase db, $ReminderLogTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$ReminderLogTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$ReminderLogTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$ReminderLogTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ReminderLogTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ReminderLogTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<int> receiptId = const Value.absent(),
@@ -1468,90 +1735,62 @@ class $$ReminderLogTableTableManager extends RootTableManager<
             isSent: isSent,
             isDismissed: isDismissed,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$ReminderLogTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({receiptId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (receiptId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.receiptId,
+                    referencedTable:
+                        $$ReminderLogTableReferences._receiptIdTable(db),
+                    referencedColumn:
+                        $$ReminderLogTableReferences._receiptIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
         ));
 }
 
-class $$ReminderLogTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $ReminderLogTable> {
-  $$ReminderLogTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get reminderType => $state.composableBuilder(
-      column: $state.table.reminderType,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get scheduledDate => $state.composableBuilder(
-      column: $state.table.scheduledDate,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<bool> get isSent => $state.composableBuilder(
-      column: $state.table.isSent,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<bool> get isDismissed => $state.composableBuilder(
-      column: $state.table.isDismissed,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  $$ReceiptsTableFilterComposer get receiptId {
-    final $$ReceiptsTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.receiptId,
-        referencedTable: $state.db.receipts,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ReceiptsTableFilterComposer(ComposerState(
-                $state.db, $state.db.receipts, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
-class $$ReminderLogTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $ReminderLogTable> {
-  $$ReminderLogTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get reminderType => $state.composableBuilder(
-      column: $state.table.reminderType,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get scheduledDate => $state.composableBuilder(
-      column: $state.table.scheduledDate,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<bool> get isSent => $state.composableBuilder(
-      column: $state.table.isSent,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<bool> get isDismissed => $state.composableBuilder(
-      column: $state.table.isDismissed,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  $$ReceiptsTableOrderingComposer get receiptId {
-    final $$ReceiptsTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.receiptId,
-        referencedTable: $state.db.receipts,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$ReceiptsTableOrderingComposer(ComposerState(
-                $state.db, $state.db.receipts, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
+typedef $$ReminderLogTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $ReminderLogTable,
+    ReminderLogData,
+    $$ReminderLogTableFilterComposer,
+    $$ReminderLogTableOrderingComposer,
+    $$ReminderLogTableAnnotationComposer,
+    $$ReminderLogTableCreateCompanionBuilder,
+    $$ReminderLogTableUpdateCompanionBuilder,
+    (ReminderLogData, $$ReminderLogTableReferences),
+    ReminderLogData,
+    PrefetchHooks Function({bool receiptId})>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;

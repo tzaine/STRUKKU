@@ -1,13 +1,13 @@
 // lib/shared/widgets/receipt_card_widget.dart
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../../core/models/receipt_model.dart';
-import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_typography.dart';
-import '../../core/utils/currency_formatter.dart';
-import '../../core/utils/date_formatter.dart';
-import 'category_badge.dart';
-import 'reminder_badge.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/core/utils/currency_formatter.dart';
+import 'package:strukku/core/utils/date_formatter.dart';
+import 'package:strukku/shared/widgets/category_badge.dart';
+import 'package:strukku/shared/widgets/reminder_badge.dart';
 
 class ReceiptCardWidget extends StatelessWidget {
   final ReceiptModel receipt;
@@ -225,8 +225,7 @@ class _DeleteConfirmSheet extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             'Struk dari $storeName akan dihapus permanen.',
-            style: AppTypography.body
-                .copyWith(color: AppColors.textSecondary),
+            style: AppTypography.body.copyWith(color: AppColors.textSecondary),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
@@ -289,8 +288,7 @@ class _ContextMenuSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          if (onEdit != null)
-            _menuItem(Icons.edit_outlined, 'Edit', onEdit!),
+          if (onEdit != null) _menuItem(Icons.edit_outlined, 'Edit', onEdit!),
           if (onExport != null)
             _menuItem(Icons.upload_outlined, 'Export', onExport!),
           if (onDelete != null)
@@ -314,8 +312,7 @@ class _ContextMenuSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         child: Row(
           children: [
-            Icon(icon, size: 22,
-                color: color ?? AppColors.textPrimary),
+            Icon(icon, size: 22, color: color ?? AppColors.textPrimary),
             const SizedBox(width: 14),
             Text(label,
                 style: AppTypography.body

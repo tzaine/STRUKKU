@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'app.dart';
-import 'core/services/notification_service.dart';
+import 'package:strukku/app.dart';
+import 'package:strukku/core/services/notification_service.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +20,6 @@ void main() async {
       // Deep link handled in router via extra state
     },
   );
-
-  FlutterNativeSplash.remove();
 
   runApp(
     const ProviderScope(

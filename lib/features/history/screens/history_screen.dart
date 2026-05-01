@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import '../../../core/models/receipt_model.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../../../shared/widgets/receipt_card_widget.dart';
-import '../../../shared/widgets/empty_state_widget.dart';
-import '../../../shared/widgets/shimmer_loader.dart';
-import '../../home/providers/home_provider.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/shared/widgets/receipt_card_widget.dart';
+import 'package:strukku/shared/widgets/empty_state_widget.dart';
+import 'package:strukku/shared/widgets/shimmer_loader.dart';
+import 'package:strukku/features/home/providers/home_provider.dart';
 
 class HistoryScreen extends ConsumerStatefulWidget {
   const HistoryScreen({super.key});
@@ -55,8 +55,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
 
             // ─── Search bar ───────────────────────────────────────────────
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               child: TextField(
                 controller: _searchCtrl,
                 decoration: const InputDecoration(
@@ -78,14 +77,12 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                   _FilterChip(
                     label: 'Semua',
                     selected: _selectedCategory == null,
-                    onTap: () =>
-                        setState(() => _selectedCategory = null),
+                    onTap: () => setState(() => _selectedCategory = null),
                   ),
                   ...ReceiptCategory.values.map((cat) => _FilterChip(
                         label: cat.label,
                         selected: _selectedCategory == cat,
-                        onTap: () =>
-                            setState(() => _selectedCategory = cat),
+                        onTap: () => setState(() => _selectedCategory = cat),
                       )),
                 ],
               ),
@@ -115,11 +112,10 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                   }).toList();
 
                   if (filtered.isEmpty) {
-                    return EmptyStateWidget(
+                    return const EmptyStateWidget(
                       icon: Icons.search_off_rounded,
                       title: 'Tidak ada struk ditemukan',
-                      subtitle:
-                          'Coba kata kunci atau filter yang berbeda.',
+                      subtitle: 'Coba kata kunci atau filter yang berbeda.',
                     );
                   }
 
@@ -130,8 +126,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                       final r = filtered[i];
                       return ReceiptCardWidget(
                         receipt: r,
-                        onTap: () =>
-                            context.go('/home/detail/${r.id}'),
+                        onTap: () => context.go('/home/detail/${r.id}'),
                         onDelete: () async {
                           final dao = ref.read(receiptsDaoProvider);
                           await dao.deleteReceipt(r.id!);
@@ -167,8 +162,7 @@ class _FilterChip extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
         margin: const EdgeInsets.only(right: 8),
-        padding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
           color: selected ? AppColors.accent : AppColors.surface,
           borderRadius: BorderRadius.circular(20),
@@ -182,10 +176,8 @@ class _FilterChip extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'Inter',
             fontSize: 12,
-            fontWeight:
-                selected ? FontWeight.w600 : FontWeight.w400,
-            color:
-                selected ? Colors.white : AppColors.textSecondary,
+            fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+            color: selected ? Colors.white : AppColors.textSecondary,
           ),
         ),
       ),

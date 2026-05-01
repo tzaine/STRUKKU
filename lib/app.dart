@@ -4,22 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'core/services/ocr_service.dart';
-import 'core/theme/app_theme.dart';
-import 'features/analytics/screens/analytics_screen.dart';
-import 'features/camera/screens/camera_screen.dart';
-import 'features/camera/screens/preview_crop_screen.dart';
-import 'features/home/screens/home_screen.dart';
-import 'features/history/screens/history_screen.dart';
-import 'features/ocr_review/screens/ocr_review_screen.dart';
-import 'features/onboarding/providers/onboarding_provider.dart';
-import 'features/onboarding/screens/intro_slides_screen.dart';
-import 'features/onboarding/screens/name_input_screen.dart';
-import 'features/receipt_detail/screens/receipt_detail_screen.dart';
-import 'features/reminder/screens/reminder_list_screen.dart';
-import 'features/search/screens/search_screen.dart';
-import 'features/splash/screens/splash_screen.dart';
-import 'shared/widgets/app_bottom_nav.dart';
+import 'package:strukku/core/services/ocr_service.dart';
+import 'package:strukku/core/theme/app_theme.dart';
+import 'package:strukku/features/analytics/screens/analytics_screen.dart';
+import 'package:strukku/features/camera/screens/camera_screen.dart';
+import 'package:strukku/features/camera/screens/preview_crop_screen.dart';
+import 'package:strukku/features/home/screens/home_screen.dart';
+import 'package:strukku/features/history/screens/history_screen.dart';
+import 'package:strukku/features/ocr_review/screens/ocr_review_screen.dart';
+import 'package:strukku/features/onboarding/providers/onboarding_provider.dart';
+import 'package:strukku/features/onboarding/screens/intro_slides_screen.dart';
+import 'package:strukku/features/onboarding/screens/name_input_screen.dart';
+import 'package:strukku/features/receipt_detail/screens/receipt_detail_screen.dart';
+import 'package:strukku/features/reminder/screens/reminder_list_screen.dart';
+import 'package:strukku/features/search/screens/search_screen.dart';
+import 'package:strukku/features/splash/screens/splash_screen.dart';
+import 'package:strukku/shared/widgets/app_bottom_nav.dart';
 
 // ─── Router provider ──────────────────────────────────────────────────────────
 final routerProvider = Provider<GoRouter>((ref) {
@@ -31,9 +31,9 @@ final routerProvider = Provider<GoRouter>((ref) {
       final onboarded = isOnboardingDone;
       final goingOnboarding = state.matchedLocation.startsWith('/onboarding');
       final isSplash = state.matchedLocation == '/splash';
-      
+
       if (isSplash) return null;
-      
+
       if (!onboarded && !goingOnboarding) return '/onboarding';
       if (onboarded && goingOnboarding) return '/home';
       return null;
@@ -76,7 +76,8 @@ final routerProvider = Provider<GoRouter>((ref) {
             pageBuilder: (context, state) => CustomTransitionPage(
               key: state.pageKey,
               transitionDuration: const Duration(milliseconds: 400),
-              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
                 return FadeTransition(
                   opacity: CurveTween(curve: Curves.easeIn).animate(animation),
                   child: child,
@@ -88,8 +89,7 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'detail/:id',
                 builder: (_, state) => ReceiptDetailScreen(
-                  receiptId:
-                      int.parse(state.pathParameters['id']!),
+                  receiptId: int.parse(state.pathParameters['id']!),
                 ),
               ),
             ],

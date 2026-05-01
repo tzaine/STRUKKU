@@ -1,8 +1,8 @@
 // lib/core/theme/app_theme.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'app_colors.dart';
-import 'app_typography.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
 
 class AppTheme {
   AppTheme._();
@@ -12,7 +12,7 @@ class AppTheme {
       useMaterial3: true,
       fontFamily: AppTypography.fontFamily,
       scaffoldBackgroundColor: AppColors.background,
-      colorScheme: ColorScheme.light(
+      colorScheme: const ColorScheme.light(
         primary: AppColors.accent,
         onPrimary: Colors.white,
         secondary: AppColors.accent,
@@ -27,13 +27,13 @@ class AppTheme {
         backgroundColor: AppColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,
           statusBarBrightness: Brightness.light,
         ),
         titleTextStyle: AppTypography.sectionTitle,
-        iconTheme: IconThemeData(color: AppColors.textPrimary, size: 24),
+        iconTheme: const IconThemeData(color: AppColors.textPrimary, size: 24),
         centerTitle: false,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -75,7 +75,8 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.warning, width: 1),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -139,7 +140,8 @@ class AppTheme {
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.surface,
         selectedColor: AppColors.accentLight,
-        labelStyle: AppTypography.caption.copyWith(color: AppColors.textSecondary),
+        labelStyle:
+            AppTypography.caption.copyWith(color: AppColors.textSecondary),
         side: const BorderSide(color: AppColors.border, width: 0.5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

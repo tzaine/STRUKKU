@@ -1,7 +1,7 @@
 // lib/core/database/daos/reminders_dao.dart
 import 'package:drift/drift.dart';
-import '../app_database.dart';
-import '../tables/reminder_log.dart';
+import 'package:strukku/core/database/app_database.dart';
+import 'package:strukku/core/database/tables/reminder_log.dart';
 
 part 'reminders_dao.g.dart';
 
@@ -19,14 +19,12 @@ class RemindersDao extends DatabaseAccessor<AppDatabase>
 
   Future<List<ReminderLogData>> getPendingReminders() {
     return (select(reminderLog)
-          ..where((t) =>
-              t.isSent.equals(false) & t.isDismissed.equals(false)))
+          ..where((t) => t.isSent.equals(false) & t.isDismissed.equals(false)))
         .get();
   }
 
   Future<List<ReminderLogData>> getRemindersForReceipt(int receiptId) {
-    return (select(reminderLog)
-          ..where((t) => t.receiptId.equals(receiptId)))
+    return (select(reminderLog)..where((t) => t.receiptId.equals(receiptId)))
         .get();
   }
 
@@ -45,8 +43,7 @@ class RemindersDao extends DatabaseAccessor<AppDatabase>
   }
 
   Future<int> deleteRemindersForReceipt(int receiptId) {
-    return (delete(reminderLog)
-          ..where((t) => t.receiptId.equals(receiptId)))
+    return (delete(reminderLog)..where((t) => t.receiptId.equals(receiptId)))
         .go();
   }
 

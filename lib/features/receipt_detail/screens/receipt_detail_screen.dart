@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import '../../../core/models/receipt_model.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../../../core/utils/currency_formatter.dart';
-import '../../../core/utils/date_formatter.dart';
-import '../../../shared/widgets/category_badge.dart';
-import '../../../shared/widgets/reminder_badge.dart';
-import '../widgets/anomaly_card.dart';
-import '../../home/providers/home_provider.dart';
-import '../../reminder/screens/set_reminder_sheet.dart';
-import '../../export/widgets/export_bottom_sheet.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/core/utils/currency_formatter.dart';
+import 'package:strukku/core/utils/date_formatter.dart';
+import 'package:strukku/shared/widgets/category_badge.dart';
+import 'package:strukku/shared/widgets/reminder_badge.dart';
+import 'package:strukku/features/receipt_detail/widgets/anomaly_card.dart';
+import 'package:strukku/features/home/providers/home_provider.dart';
+import 'package:strukku/features/reminder/screens/set_reminder_sheet.dart';
+import 'package:strukku/features/export/widgets/export_bottom_sheet.dart';
 
 class ReceiptDetailScreen extends ConsumerStatefulWidget {
   final int receiptId;
@@ -99,8 +99,7 @@ class _ReceiptDetailScreenState extends ConsumerState<ReceiptDetailScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: Text(receipt.storeName,
-            style: AppTypography.sectionTitle),
+        title: Text(receipt.storeName, style: AppTypography.sectionTitle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () => context.pop(),
@@ -125,8 +124,7 @@ class _ReceiptDetailScreenState extends ConsumerState<ReceiptDetailScreen> {
                     color: AppColors.surface,
                     child: const Center(
                         child: Icon(Icons.receipt_long_outlined,
-                            size: 40,
-                            color: AppColors.textSecondary)),
+                            size: 40, color: AppColors.textSecondary)),
                   ),
                 ),
               ),
@@ -138,8 +136,8 @@ class _ReceiptDetailScreenState extends ConsumerState<ReceiptDetailScreen> {
             const SizedBox(height: 4),
             Text(
               DateFormatter.format(receipt.date),
-              style: AppTypography.body
-                  .copyWith(color: AppColors.textSecondary),
+              style:
+                  AppTypography.body.copyWith(color: AppColors.textSecondary),
             ),
             const SizedBox(height: 12),
             Row(
@@ -161,8 +159,7 @@ class _ReceiptDetailScreenState extends ConsumerState<ReceiptDetailScreen> {
                 decoration: BoxDecoration(
                   color: AppColors.amberBg,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                      color: AppColors.amber.withOpacity(0.3)),
+                  border: Border.all(color: AppColors.amber.withOpacity(0.3)),
                 ),
                 child: Row(
                   children: [
@@ -196,8 +193,7 @@ class _ReceiptDetailScreenState extends ConsumerState<ReceiptDetailScreen> {
             if (receipt.anomalyDetected && !_anomalyIgnored) ...[
               const SizedBox(height: 16),
               AnomalyCard(
-                onIgnore: () =>
-                    setState(() => _anomalyIgnored = true),
+                onIgnore: () => setState(() => _anomalyIgnored = true),
                 onEdit: () {
                   // TODO: open edit screen
                 },
@@ -227,8 +223,8 @@ class _ReceiptDetailScreenState extends ConsumerState<ReceiptDetailScreen> {
                           child: Row(
                             children: [
                               Expanded(
-                                child: Text(item.name,
-                                    style: AppTypography.body),
+                                child:
+                                    Text(item.name, style: AppTypography.body),
                               ),
                               Text(
                                 CurrencyFormatter.format(item.price),
@@ -256,8 +252,7 @@ class _ReceiptDetailScreenState extends ConsumerState<ReceiptDetailScreen> {
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
         decoration: const BoxDecoration(
           color: AppColors.background,
-          border: Border(
-              top: BorderSide(color: AppColors.border, width: 0.5)),
+          border: Border(top: BorderSide(color: AppColors.border, width: 0.5)),
         ),
         child: Row(
           children: [

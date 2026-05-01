@@ -41,8 +41,12 @@ class _OcrReviewScreenState extends ConsumerState<OcrReviewScreen> {
     final ocr = widget.ocrResult;
     _storeCtrl = TextEditingController(
         text: ocr.storeName.value ?? '');
+    
+    // Use plain format with dots for initial display
+    final totalVal = ocr.total.value ?? 0;
     _totalCtrl = TextEditingController(
-        text: ocr.total.value?.toStringAsFixed(0) ?? '');
+        text: totalVal > 0 ? CurrencyFormatter.formatPlain(totalVal) : '');
+
     _selectedDate = ocr.date.value ?? DateTime.now();
     _selectedCategory = ReceiptCategory.lainnya;
     _items = ocr.items
@@ -246,55 +250,88 @@ class _OcrReviewScreenState extends ConsumerState<OcrReviewScreen> {
 
                   // ─── Items ───────────────────────────────────────────────
                   if (_items.isNotEmpty) ...[
-                    Text('Daftar Item', style: AppTypography.sectionTitle),
-                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Daftar Item', style: AppTypography.sectionTitle),
+                        Text('${_items.length} Item', style: AppTypography.caption),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
                     ...List.generate(_items.length, (i) {
                       final item = _items[i];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: AppColors.surface,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: AppColors.border, width: 0.5),
+                        ),
                         child: Row(
                           children: [
                             Expanded(
-                              child: Text(item.name,
-                                  style: AppTypography.body),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(item.name,
+                                      style: AppTypography.body,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    CurrencyFormatter.format(item.price),
+                                    style: AppTypography.bodyBold.copyWith(color: AppColors.accent),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              CurrencyFormatter.format(item.price),
-                              style: AppTypography.bodyBold,
+                            IconButton(
+                              icon: const Icon(Icons.delete_outline_rounded, 
+                                color: AppColors.warning, size: 20),
+                              onPressed: () {
+                                setState(() {
+                                  _items.removeAt(i);
+                                });
+                              },
                             ),
                           ],
                         ),
                       );
                     }),
                   ],
+                  const SizedBox(height: 32),
+
+                  // ─── Bottom actions ───────────────────────────────────────────────
+                  // Moved inside scroll view to prevent overflow and ensure buttons are accessible
+                  Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: _isSaving ? null : _save,
+                        child: _isSaving
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation(
+                                        Colors.white)))
+                            : const Text('Simpan Struk'),
+                      ),
+                      const SizedBox(height: 12),
+                      OutlinedButton(
+                        onPressed: () => context.go('/camera'),
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: AppColors.textSecondary,
+                          side: const BorderSide(color: AppColors.border),
+                        ),
+                        child: const Text('Scan Ulang / Batal'),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
                 ],
               ),
-            ),
-          ),
-
-          // ─── Bottom actions ───────────────────────────────────────────────
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
-            child: Column(
-              children: [
-                OutlinedButton(
-                  onPressed: () => context.go('/camera'),
-                  child: const Text('Scan Ulang'),
-                ),
-                const SizedBox(height: 12),
-                ElevatedButton(
-                  onPressed: _isSaving ? null : _save,
-                  child: _isSaving
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation(
-                                  Colors.white)))
-                      : const Text('Simpan Struk'),
-                ),
-              ],
             ),
           ),
         ],

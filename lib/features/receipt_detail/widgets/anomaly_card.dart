@@ -1,7 +1,7 @@
 // lib/features/receipt_detail/widgets/anomaly_card.dart
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
 
 class AnomalyCard extends StatelessWidget {
   final VoidCallback? onIgnore;
@@ -17,9 +17,12 @@ class AnomalyCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border(
           left: const BorderSide(color: AppColors.warning, width: 3),
-          top: BorderSide(color: AppColors.warning.withOpacity(0.2), width: 0.5),
-          right: BorderSide(color: AppColors.warning.withOpacity(0.2), width: 0.5),
-          bottom: BorderSide(color: AppColors.warning.withOpacity(0.2), width: 0.5),
+          top:
+              BorderSide(color: AppColors.warning.withOpacity(0.2), width: 0.5),
+          right:
+              BorderSide(color: AppColors.warning.withOpacity(0.2), width: 0.5),
+          bottom:
+              BorderSide(color: AppColors.warning.withOpacity(0.2), width: 0.5),
         ),
       ),
       padding: const EdgeInsets.all(14),
@@ -41,8 +44,7 @@ class AnomalyCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             'Total tidak sesuai penjumlahan item',
-            style: AppTypography.caption
-                .copyWith(color: AppColors.warning),
+            style: AppTypography.caption.copyWith(color: AppColors.warning),
           ),
           const SizedBox(height: 12),
           Row(
@@ -69,8 +71,8 @@ class AnomalyCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     minimumSize: const Size(0, 38),
                   ),
-                  child: const Text('Edit Manual',
-                      style: TextStyle(fontSize: 13)),
+                  child:
+                      const Text('Edit Manual', style: TextStyle(fontSize: 13)),
                 ),
               ),
             ],

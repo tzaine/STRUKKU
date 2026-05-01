@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../../../core/utils/currency_formatter.dart';
-import '../../../core/utils/date_formatter.dart';
-import '../../../shared/widgets/receipt_card_widget.dart';
-import '../../../shared/widgets/empty_state_widget.dart';
-import '../../../shared/widgets/shimmer_loader.dart';
-import '../../onboarding/providers/onboarding_provider.dart';
-import '../providers/home_provider.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/core/utils/currency_formatter.dart';
+import 'package:strukku/core/utils/date_formatter.dart';
+import 'package:strukku/shared/widgets/receipt_card_widget.dart';
+import 'package:strukku/shared/widgets/empty_state_widget.dart';
+import 'package:strukku/shared/widgets/shimmer_loader.dart';
+import 'package:strukku/features/onboarding/providers/onboarding_provider.dart';
+import 'package:strukku/features/home/providers/home_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -31,8 +31,7 @@ class HomeScreen extends ConsumerWidget {
             // ─── Header ───────────────────────────────────────────────────
             SliverToBoxAdapter(
               child: Padding(
-                padding:
-                    const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -150,24 +149,21 @@ class HomeScreen extends ConsumerWidget {
                     child: EmptyStateWidget(
                       icon: Icons.receipt_long_outlined,
                       title: 'Belum ada struk tersimpan, $userName.',
-                      subtitle:
-                          'Ketuk tombol kamera untuk mulai scan.',
+                      subtitle: 'Ketuk tombol kamera untuk mulai scan.',
                       ctaLabel: 'Scan Sekarang',
                       onCta: () => context.go('/camera'),
                     ),
                   );
                 }
                 return SliverPadding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (_, i) {
                         final r = recentReceipts[i];
                         return ReceiptCardWidget(
                           receipt: r,
-                          onTap: () =>
-                              context.go('/home/detail/${r.id}'),
+                          onTap: () => context.go('/home/detail/${r.id}'),
                         );
                       },
                       childCount: recentReceipts.length,
@@ -207,8 +203,7 @@ class HomeScreen extends ConsumerWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                CurrencyFormatter.format(
-                                    stats.totalThisMonth),
+                                CurrencyFormatter.format(stats.totalThisMonth),
                                 style: AppTypography.pageTitle.copyWith(
                                   color: AppColors.accent,
                                   fontSize: 20,
@@ -216,7 +211,7 @@ class HomeScreen extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          Icon(Icons.chevron_right_rounded,
+                          const Icon(Icons.chevron_right_rounded,
                               color: AppColors.accent),
                         ],
                       ),

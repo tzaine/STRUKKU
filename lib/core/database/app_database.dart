@@ -1,10 +1,10 @@
 // lib/core/database/app_database.dart
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
-import 'tables/receipts.dart';
-import 'tables/reminder_log.dart';
-import 'daos/receipts_dao.dart';
-import 'daos/reminders_dao.dart';
+import 'package:strukku/core/database/tables/receipts.dart';
+import 'package:strukku/core/database/tables/reminder_log.dart';
+import 'package:strukku/core/database/daos/receipts_dao.dart';
+import 'package:strukku/core/database/daos/reminders_dao.dart';
 
 part 'app_database.g.dart';
 

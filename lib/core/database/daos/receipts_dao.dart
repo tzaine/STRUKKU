@@ -1,10 +1,10 @@
 // lib/core/database/daos/receipts_dao.dart
 import 'dart:convert';
 import 'package:drift/drift.dart';
-import '../app_database.dart';
-import '../../models/receipt_model.dart';
-import '../../models/receipt_item.dart';
-import '../tables/receipts.dart';
+import 'package:strukku/core/database/app_database.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/core/models/receipt_item.dart';
+import 'package:strukku/core/database/tables/receipts.dart';
 
 part 'receipts_dao.g.dart';
 
@@ -15,16 +15,14 @@ class ReceiptsDao extends DatabaseAccessor<AppDatabase>
 
   // ─── Stream all receipts, newest first ────────────────────────────────────
   Stream<List<Receipt>> watchAllReceipts() {
-    return (select(receipts)
-          ..orderBy([(t) => OrderingTerm.desc(t.createdAt)]))
+    return (select(receipts)..orderBy([(t) => OrderingTerm.desc(t.createdAt)]))
         .watch();
   }
 
   // ─── Watch receipts for this month ────────────────────────────────────────
   Stream<List<Receipt>> watchReceiptsThisMonth() {
     final now = DateTime.now();
-    final startOfMonth =
-        DateTime(now.year, now.month, 1).toIso8601String();
+    final startOfMonth = DateTime(now.year, now.month, 1).toIso8601String();
     return (select(receipts)
           ..where((t) => t.date.isBiggerOrEqualValue(startOfMonth))
           ..orderBy([(t) => OrderingTerm.desc(t.date)]))
@@ -41,8 +39,7 @@ class ReceiptsDao extends DatabaseAccessor<AppDatabase>
 
   // ─── Get single receipt ────────────────────────────────────────────────────
   Future<Receipt?> getReceiptById(int id) {
-    return (select(receipts)..where((t) => t.id.equals(id)))
-        .getSingleOrNull();
+    return (select(receipts)..where((t) => t.id.equals(id))).getSingleOrNull();
   }
 
   // ─── Insert ───────────────────────────────────────────────────────────────

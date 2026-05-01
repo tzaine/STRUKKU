@@ -7,8 +7,7 @@ import 'package:timezone/timezone.dart' as tz;
 class NotificationService {
   static const String _channelId = 'strukku_reminders';
   static const String _channelName = 'Strukku Reminders';
-  static const String _channelDesc =
-      'Pengingat retur dan garansi produk Anda';
+  static const String _channelDesc = 'Pengingat retur dan garansi produk Anda';
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
@@ -57,15 +56,12 @@ class NotificationService {
   }
 
   Future<bool> requestPermissions() async {
-    final android = _plugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>();
-    final granted =
-        await android?.requestNotificationsPermission() ?? false;
+    final android = _plugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    final granted = await android?.requestNotificationsPermission() ?? false;
 
-    final ios = _plugin
-        .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>();
+    final ios = _plugin.resolvePlatformSpecificImplementation<
+        IOSFlutterLocalNotificationsPlugin>();
     await ios?.requestPermissions(alert: true, badge: true, sound: true);
 
     return granted;
@@ -97,7 +93,7 @@ class NotificationService {
       title,
       body,
       scheduledTz,
-      NotificationDetails(
+      const NotificationDetails(
         android: AndroidNotificationDetails(
           _channelId,
           _channelName,
@@ -106,7 +102,7 @@ class NotificationService {
           priority: Priority.high,
           icon: '@mipmap/ic_launcher',
         ),
-        iOS: const DarwinNotificationDetails(
+        iOS: DarwinNotificationDetails(
           presentAlert: true,
           presentBadge: true,
           presentSound: true,

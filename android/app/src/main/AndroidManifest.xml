@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="id.strukku.app">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Camera -->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -8,7 +8,7 @@
 
     <!-- Storage -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" tools:replace="android:maxSdkVersion" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <!-- Notifications -->
@@ -26,10 +26,11 @@
         android:label="Strukku"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
+        android:extractNativeLibs="true"
         android:usesCleartextTraffic="false">
 
         <activity
-            android:name=".MainActivity"
+            android:name="id.strukku.app.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

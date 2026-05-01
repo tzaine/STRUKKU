@@ -1,7 +1,7 @@
 // lib/shared/widgets/reminder_badge.dart
 import 'package:flutter/material.dart';
-import '../../core/theme/app_colors.dart';
-import '../../core/utils/date_formatter.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/utils/date_formatter.dart';
 
 enum ReminderUrgency { normal, approaching, critical, expired }
 

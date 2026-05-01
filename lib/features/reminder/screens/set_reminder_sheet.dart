@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../../core/database/app_database.dart';
+import 'package:strukku/core/database/app_database.dart';
 import 'package:drift/drift.dart' as drift;
-import '../../../core/models/receipt_model.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../../../core/services/notification_service.dart';
-import '../../home/providers/home_provider.dart';
+import 'package:strukku/core/models/receipt_model.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/core/services/notification_service.dart';
+import 'package:strukku/features/home/providers/home_provider.dart';
 
 class SetReminderSheet extends ConsumerStatefulWidget {
   final ReceiptModel receipt;
@@ -74,7 +74,7 @@ class _SetReminderSheetState extends ConsumerState<SetReminderSheet> {
       await notifService.requestPermissions();
 
       final dao = ref.read(remindersDaoProvider);
-      
+
       // Update receipt with reminder info
       final receiptsDao = ref.read(receiptsDaoProvider);
       final updatedReceipt = widget.receipt.copyWith(
@@ -93,7 +93,7 @@ class _SetReminderSheetState extends ConsumerState<SetReminderSheet> {
       for (final dayStr in _selectedDays) {
         final daysStr = dayStr.replaceAll('H-', '');
         final days = int.tryParse(daysStr) ?? 1;
-        
+
         final scheduledDate = date.subtract(Duration(days: days));
         if (scheduledDate.isAfter(DateTime.now())) {
           // Schedule notif
@@ -108,14 +108,12 @@ class _SetReminderSheetState extends ConsumerState<SetReminderSheet> {
           );
 
           // Save to DB
-          await dao.insertReminder(
-            ReminderLogCompanion.insert(
-              receiptId: widget.receipt.id!,
-              scheduledDate: scheduledDate.toIso8601String(),
-              reminderType: type.label,
-              isDismissed: const drift.Value(false),
-            )
-          );
+          await dao.insertReminder(ReminderLogCompanion.insert(
+            receiptId: widget.receipt.id!,
+            scheduledDate: scheduledDate.toIso8601String(),
+            reminderType: type.label,
+            isDismissed: const drift.Value(false),
+          ));
         }
       }
 
@@ -196,8 +194,8 @@ class _SetReminderSheetState extends ConsumerState<SetReminderSheet> {
                   onDateTap: () async {
                     final d = await showDatePicker(
                       context: context,
-                      initialDate:
-                          _garansiDeadline ?? DateTime.now().add(const Duration(days: 30)),
+                      initialDate: _garansiDeadline ??
+                          DateTime.now().add(const Duration(days: 30)),
                       firstDate: DateTime.now(),
                       lastDate: DateTime.now().add(const Duration(days: 3650)),
                     );
@@ -212,8 +210,7 @@ class _SetReminderSheetState extends ConsumerState<SetReminderSheet> {
                 const SizedBox(height: 20),
 
                 // ─── Notify on ────────────────────────────────────────────
-                Text('Ingatkan pada',
-                    style: AppTypography.caption),
+                Text('Ingatkan pada', style: AppTypography.caption),
                 const SizedBox(height: 10),
                 Wrap(
                   spacing: 8,
@@ -232,14 +229,12 @@ class _SetReminderSheetState extends ConsumerState<SetReminderSheet> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
-                          color: selected
-                              ? AppColors.accent
-                              : AppColors.surface,
+                          color:
+                              selected ? AppColors.accent : AppColors.surface,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
-                            color: selected
-                                ? AppColors.accent
-                                : AppColors.border,
+                            color:
+                                selected ? AppColors.accent : AppColors.border,
                             width: 0.5,
                           ),
                         ),
@@ -262,18 +257,16 @@ class _SetReminderSheetState extends ConsumerState<SetReminderSheet> {
 
                 // ─── Save button ──────────────────────────────────────────
                 ElevatedButton(
-                  onPressed:
-                      (_returEnabled || _garansiEnabled) && !_isSaving
-                          ? _save
-                          : null,
+                  onPressed: (_returEnabled || _garansiEnabled) && !_isSaving
+                      ? _save
+                      : null,
                   child: _isSaving
                       ? const SizedBox(
                           width: 20,
                           height: 20,
                           child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation(
-                                  Colors.white)))
+                              valueColor: AlwaysStoppedAnimation(Colors.white)))
                       : const Text('Simpan Reminder'),
                 ),
                 const SizedBox(height: 8),
@@ -333,7 +326,7 @@ class _ReminderToggle extends StatelessWidget {
             Switch(
               value: value,
               onChanged: onChanged,
-              activeColor: AppColors.accent,
+              activeThumbColor: AppColors.accent,
             ),
           ],
         ),

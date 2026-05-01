@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/services/image_processing_service.dart';
-import '../../../core/services/ocr_service.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../../../shared/widgets/shimmer_loader.dart';
+import 'package:strukku/core/services/image_processing_service.dart';
+import 'package:strukku/core/services/ocr_service.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/shared/widgets/shimmer_loader.dart';
 
 class PreviewCropScreen extends ConsumerStatefulWidget {
   final File imageFile;
@@ -29,8 +29,7 @@ class _PreviewCropScreenState extends ConsumerState<PreviewCropScreen> {
       final ocrSvc = OcrService();
 
       // Save original + preprocess
-      final savedOriginal =
-          await imgSvc.saveReceiptPhoto(widget.imageFile);
+      final savedOriginal = await imgSvc.saveReceiptPhoto(widget.imageFile);
       final processedFile = await imgSvc.preprocess(savedOriginal);
 
       // Run OCR
@@ -119,8 +118,7 @@ class _PreviewCropScreenState extends ConsumerState<PreviewCropScreen> {
                           height: 20,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            valueColor:
-                                AlwaysStoppedAnimation(Colors.white),
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
                           ),
                         )
                       : const Text('Proses OCR'),

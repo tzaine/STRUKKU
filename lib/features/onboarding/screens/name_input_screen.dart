@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_typography.dart';
-import '../providers/onboarding_provider.dart';
+import 'package:strukku/core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_typography.dart';
+import 'package:strukku/features/onboarding/providers/onboarding_provider.dart';
 
 class NameInputScreen extends ConsumerStatefulWidget {
   const NameInputScreen({super.key});
@@ -151,8 +151,7 @@ class _NameInputScreenState extends ConsumerState<NameInputScreen>
                             height: 20,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              valueColor:
-                                  AlwaysStoppedAnimation(Colors.white),
+                              valueColor: AlwaysStoppedAnimation(Colors.white),
                             ),
                           )
                         : const Text('Mulai Pakai Strukku'),
@@ -204,9 +203,8 @@ class _ReceiptIllustration extends StatelessWidget {
                     child: Container(
                       height: 8,
                       decoration: BoxDecoration(
-                        color: i == 2
-                            ? AppColors.accentLight
-                            : AppColors.border,
+                        color:
+                            i == 2 ? AppColors.accentLight : AppColors.border,
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),

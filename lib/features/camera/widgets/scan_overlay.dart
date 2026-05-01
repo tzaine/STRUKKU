@@ -1,6 +1,6 @@
 // lib/features/camera/widgets/scan_overlay.dart
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
+import 'package:strukku/core/theme/app_colors.dart';
 
 class ScanOverlay extends StatelessWidget {
   final double scanAreaWidth;
@@ -23,7 +23,7 @@ class ScanOverlay extends StatelessWidget {
         child: SizedBox(
           width: scanAreaWidth,
           height: scanAreaHeight,
-          child: Stack(
+          child: const Stack(
             children: [
               // ─── Corner brackets ──────────────────────────────────────────
               _CornerBracket(alignment: Alignment.topLeft),
@@ -45,10 +45,10 @@ class _CornerBracket extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isLeft = alignment == Alignment.topLeft ||
-        alignment == Alignment.bottomLeft;
-    final isTop = alignment == Alignment.topLeft ||
-        alignment == Alignment.topRight;
+    final isLeft =
+        alignment == Alignment.topLeft || alignment == Alignment.bottomLeft;
+    final isTop =
+        alignment == Alignment.topLeft || alignment == Alignment.topRight;
 
     return Align(
       alignment: alignment,
