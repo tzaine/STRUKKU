@@ -5,6 +5,12 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
+  // Singleton instance — ensures _save() in set_reminder_sheet
+  // uses the same initialized plugin as main.dart
+  static final NotificationService _instance = NotificationService._internal();
+  factory NotificationService() => _instance;
+  NotificationService._internal();
+
   static const String _channelId = 'strukku_reminders';
   static const String _channelName = 'Strukku Reminders';
   static const String _channelDesc = 'Pengingat retur dan garansi produk Anda';
@@ -59,6 +65,9 @@ class NotificationService {
     final android = _plugin.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>();
     final granted = await android?.requestNotificationsPermission() ?? false;
+
+    // Android 12+ requires explicit exact alarm permission
+    await android?.requestExactAlarmsPermission();
 
     final ios = _plugin.resolvePlatformSpecificImplementation<
         IOSFlutterLocalNotificationsPlugin>();

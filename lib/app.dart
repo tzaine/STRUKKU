@@ -20,12 +20,14 @@ import 'package:strukku/features/reminder/screens/reminder_list_screen.dart';
 import 'package:strukku/features/search/screens/search_screen.dart';
 import 'package:strukku/features/splash/screens/splash_screen.dart';
 import 'package:strukku/shared/widgets/app_bottom_nav.dart';
+import 'package:strukku/main.dart' show rootNavigatorKey;
 
 // ─── Router provider ──────────────────────────────────────────────────────────
 final routerProvider = Provider<GoRouter>((ref) {
   final isOnboardingDone = ref.watch(isOnboardingDoneProvider);
 
   return GoRouter(
+    navigatorKey: rootNavigatorKey,
     initialLocation: '/splash',
     redirect: (ctx, state) {
       final onboarded = isOnboardingDone;

@@ -5,6 +5,10 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:strukku/app.dart';
 import 'package:strukku/core/services/notification_service.dart';
+import 'package:go_router/go_router.dart';
+
+/// Global navigator key for deep-linking from notification taps
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +21,8 @@ void main() async {
   final notifService = NotificationService();
   await notifService.init(
     onTap: (receiptId) {
-      // Deep link handled in router via extra state
+      // Deep link to receipt detail when notification is tapped
+      rootNavigatorKey.currentContext?.go('/home/detail/$receiptId');
     },
   );
 

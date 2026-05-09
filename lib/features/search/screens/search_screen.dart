@@ -117,6 +117,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               return ReceiptCardWidget(
                 receipt: r,
                 onTap: () => context.go('/home/detail/${r.id}'),
+                onDelete: () async {
+                  final dao = ref.read(receiptsDaoProvider);
+                  await dao.deleteReceipt(r.id!);
+                },
               );
             },
           );

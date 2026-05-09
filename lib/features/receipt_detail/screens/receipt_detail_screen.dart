@@ -15,6 +15,7 @@ import 'package:strukku/features/receipt_detail/widgets/anomaly_card.dart';
 import 'package:strukku/features/home/providers/home_provider.dart';
 import 'package:strukku/features/reminder/screens/set_reminder_sheet.dart';
 import 'package:strukku/features/export/widgets/export_bottom_sheet.dart';
+import 'package:strukku/features/receipt_detail/screens/edit_receipt_screen.dart';
 
 class ReceiptDetailScreen extends ConsumerStatefulWidget {
   final int receiptId;
@@ -264,7 +265,17 @@ class _ReceiptDetailScreenState extends ConsumerState<ReceiptDetailScreen> {
             _ActionButton(
               icon: Icons.edit_outlined,
               label: 'Edit',
-              onTap: () {}, // TODO
+              onTap: () async {
+                final result = await Navigator.push<bool>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => EditReceiptScreen(receipt: receipt),
+                  ),
+                );
+                if (result == true && mounted) {
+                  _loadReceipt(); // reload data after edit
+                }
+              },
             ),
             _ActionButton(
               icon: Icons.upload_outlined,

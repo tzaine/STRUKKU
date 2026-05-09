@@ -8,6 +8,7 @@ import 'package:strukku/core/utils/currency_formatter.dart';
 import 'package:strukku/core/utils/date_formatter.dart';
 import 'package:strukku/shared/widgets/category_badge.dart';
 import 'package:strukku/shared/widgets/reminder_badge.dart';
+import 'package:strukku/shared/widgets/receipt_preview_sheet.dart';
 
 class ReceiptCardWidget extends StatelessWidget {
   final ReceiptModel receipt;
@@ -15,6 +16,7 @@ class ReceiptCardWidget extends StatelessWidget {
   final VoidCallback? onDelete;
   final VoidCallback? onEdit;
   final VoidCallback? onExport;
+  final VoidCallback? onLongPress;
 
   const ReceiptCardWidget({
     super.key,
@@ -23,6 +25,7 @@ class ReceiptCardWidget extends StatelessWidget {
     this.onDelete,
     this.onEdit,
     this.onExport,
+    this.onLongPress,
   });
 
   @override
@@ -31,10 +34,15 @@ class ReceiptCardWidget extends StatelessWidget {
       key: Key('receipt_${receipt.id}'),
       direction: DismissDirection.endToStart,
       confirmDismiss: (_) => _confirmDelete(context),
+      onDismissed: (_) {
+        if (onDelete != null) {
+          onDelete!();
+        }
+      },
       background: _swipeBackground(),
       child: GestureDetector(
         onTap: onTap,
-        onLongPress: () => _showContextMenu(context),
+        onLongPress: onLongPress ?? () => _showPreviewSheet(context),
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 4),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -152,6 +160,15 @@ class ReceiptCardWidget extends StatelessWidget {
         onConfirm: () => Navigator.of(ctx).pop(true),
         onCancel: () => Navigator.of(ctx).pop(false),
       ),
+    );
+  }
+
+  void _showPreviewSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => ReceiptPreviewSheet(receipt: receipt),
     );
   }
 
